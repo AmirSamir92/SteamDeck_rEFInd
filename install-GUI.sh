@@ -46,16 +46,16 @@ cp rEFInd_GUI ../
 cd "$WORKING_DIRECTORY"
 sudo steamos-readonly enable
 
-while true; do
-	echo ""
+#while true; do
+echo ""
 #	read -p "Do you want to copy the rEFInd_GUI icon to the desktop? (y/n) " YN
 #	case $YN in 
 #		[yY]) echo -e "\nOk, icon will be copied to the desktop.\n"
-			cp $HOME/.SteamDeck_rEFInd/GUI/refind_GUI.desktop $HOME/Desktop
-			chmod +x $HOME/Desktop/refind_GUI.desktop
+cp $HOME/.SteamDeck_rEFInd/GUI/refind_GUI.desktop $HOME/Desktop
+chmod +x $HOME/Desktop/refind_GUI.desktop
 #			break;;
 #		[nN]) echo -e "\nIcon will not be copied to the desktop.\n"
 #			exit;;
 #		*) echo -e "\nInvalid response.";;
 #	esac
-done
+#done
