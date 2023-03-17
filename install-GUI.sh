@@ -12,9 +12,9 @@ sudo pacman-key --init
 sudo pacman-key --populate archlinux
 # sudo pacman -Sy base-devel
 # Install base-devel member packages
-sudo pacman -Sy --noconfirm archlinux-keyring autoconf automake binutils bison debugedit fakeroot file findutils flex gawk gcc gettext\
+sudo pacman -Sy --noconfirm --needed archlinux-keyring autoconf automake binutils bison debugedit fakeroot file findutils flex gawk gcc gettext\
  grep groff gzip libtool m4 make pacman patch pkgconf sed sudo texinfo which
-sudo pacman -Sy --noconfirm glibc hwinfo linux-api-headers qt5-base
+sudo pacman -Sy --noconfirm --needed glibc hwinfo linux-api-headers qt5-base
 if [ "$#" -eq 0 ]
 then
 CURRENT_WD=$(pwd)
@@ -31,6 +31,7 @@ yes | cp $CURRENT_WD/refind-GUI.conf $HOME/.SteamDeck_rEFInd/GUI/refind.conf
 chmod +x $HOME/.SteamDeck_rEFInd/*.sh
 chmod +x $HOME/.SteamDeck_rEFInd/GUI/refind_GUI.desktop
 chmod +x $CURRENT_WD/reinstall-GUI.sh
+WORKING_DIRECTORY=$(pwd)
 cd $HOME/.SteamDeck_rEFInd/GUI/src
 qmake
 make
@@ -42,6 +43,7 @@ if [ ! -f $HOME/.SteamDeck_rEFInd/GUI/src/rEFInd_GUI ]; then
 fi
 
 cp rEFInd_GUI ../
+cd "$WORKING_DIRECTORY"
 sudo steamos-readonly enable
 
 while true; do
