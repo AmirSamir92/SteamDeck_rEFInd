@@ -27,7 +27,7 @@ bool Boot_Last_OS_bool;
 bool Enable_Mouse_bool;
 bool Firmware_BootNum_bool;
 int Update_Num;
-int VERSION = 119;
+int VERSION = 120;
 QString Background;
 QString Background_fileName;
 QString Boot_Option_1;
@@ -369,6 +369,15 @@ string MainWindow::CreateBootStanza(QString &BootOption, const char *BootNum, bo
             Boot_Stanza_GUI.append("\tgraphics on\n}\n");
             return Boot_Stanza_GUI;
         }
+        if(Linux_Select_str == "Arch - Systemd") {
+            Boot_Stanza_GUI.append("\nmenuentry \"Arch\" {\n");
+            Boot_Stanza_GUI.append("\ticon /EFI/refind/os_icon");
+            Boot_Stanza_GUI.append(BootNum);
+            Boot_Stanza_GUI.append(".png\n");
+            Boot_Stanza_GUI.append("\tloader /EFI/systemd/systemd-bootx64.efi\n");
+            Boot_Stanza_GUI.append("\tgraphics on\n}\n");
+            return Boot_Stanza_GUI;
+        }
         if(Linux_Select_str == "CentOS") {
             Boot_Stanza_GUI.append("\nmenuentry \"CentOS\" {\n");
             Boot_Stanza_GUI.append("\ticon /EFI/refind/os_icon");
@@ -610,7 +619,7 @@ void MainWindow::on_About_pushButton_clicked()
     QPushButton* updateButton = new QPushButton("Check For Update");
     connect(updateButton, &QPushButton::clicked, this, &MainWindow::on_updateButton_Clicked);
     AboutBox.setTextFormat(Qt::RichText);
-    AboutBox.setText("<p align='center'>rEFInd Customization GUI v1.1.9<br><br>"
+    AboutBox.setText("<p align='center'>rEFInd Customization GUI v1.2.0<br><br>"
                      "Original GUI Creator: "
                      "<a href='https://github.com/jlobue10'>jlobue10</a><br><br>"
                      "Special Thanks to Deck Wizard for testing and QA"
